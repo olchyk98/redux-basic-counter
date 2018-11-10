@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class Button extends Component {
   render() {
@@ -9,17 +10,32 @@ class Button extends Component {
 }
 
 class App extends Component {
+  setValue = value => {
+    this.props.updateValue(value);
+  }
+
   render() {
     return (
       <div className="box">
-        <h1 className="box-counter">2</h1>
+        <h1 className="box-counter">{ this.props.value }</h1>
         <div className="box-controls">
-          <Button _onClick={ ()=>null }>-</Button>
-          <Button _onClick={ ()=>null }>+</Button>
+          <Button _onClick={ () => this.setValue(-1) }>-</Button>
+          <Button _onClick={ () => this.setValue(1) }>+</Button>
         </div>
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  value: state
+});
+
+const mapActionsToProps = {
+  updateValue: payload => ({ type: "UPDATE_PER_ONE", payload })
+}
+
+export default connect(
+  mapStateToProps,
+  mapActionsToProps
+)(App);
