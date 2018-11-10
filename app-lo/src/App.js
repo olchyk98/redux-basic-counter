@@ -4,23 +4,32 @@ import { connect } from 'react-redux';
 class Button extends Component {
   render() {
     return(
-      <button className="box-btn" onClick={ this.props._onClick }>{ this.props.children }</button>
+      <button className="box-btn definp" onClick={ this.props._onClick }>{ this.props.children }</button>
     );
   }
 }
 
 class App extends Component {
-  setValue = value => {
+  updateValue = value => {
     this.props.updateValue(value);
+  }
+
+  setValue = value => {
+    this.props.setValue(parseInt(value));
   }
 
   render() {
     return (
       <div className="box">
-        <h1 className="box-counter">{ this.props.value }</h1>
+        <input
+          type="number"
+          className="box-counter definp"
+          value={ this.props.value }
+          onChange={ ({ target: { value } }) => this.setValue(value) }
+        />
         <div className="box-controls">
-          <Button _onClick={ () => this.setValue(-1) }>-</Button>
-          <Button _onClick={ () => this.setValue(1) }>+</Button>
+          <Button _onClick={ () => this.updateValue(-1) }>-</Button>
+          <Button _onClick={ () => this.updateValue(1) }>+</Button>
         </div>
       </div>
     );
@@ -32,7 +41,8 @@ const mapStateToProps = state => ({
 });
 
 const mapActionsToProps = {
-  updateValue: payload => ({ type: "UPDATE_PER_ONE", payload })
+  updateValue: payload => ({ type: "UPDATE_PER_ONE", payload }),
+  setValue: payload => ({ type: "UPDATE_CUSTOM", payload })
 }
 
 export default connect(

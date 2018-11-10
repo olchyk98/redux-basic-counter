@@ -6,12 +6,31 @@ html, body {
   background:linear-gradient(135deg, #0F2027, #052936, #12323f);
 }
 
+.definp {
+  outline:0;
+  border:none;
+  background:none;
+}
+
+.definp[type=number]::-webkit-inner-spin-button, 
+.definp[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
 .box {
   position:absolute;
   top:50%;
   left:50%;
   margin-right:50%;
   transform:translate(-50%, -50%);
+  display:flex;
+  align-items:center;
+  flex-direction:column;
+}
+
+.box > * {
+  flex-shrink:0;
 }
 
 .box-counter {
@@ -24,6 +43,7 @@ html, body {
   align-items:center;
   margin:0;
   margin-bottom:15px;
+  text-align:center;
 }
 
 .box-controls {
@@ -34,9 +54,6 @@ html, body {
 }
 
 .box-btn {
-  outline:0;
-  border:none;
-  background:none;
   font-size:2em;
   color:white;
   cursor:pointer;

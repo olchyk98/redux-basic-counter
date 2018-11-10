@@ -14,6 +14,9 @@ function reducer(state = 0, { type, payload }) {
         case 'UPDATE_PER_ONE':
             a = state + payload;
         break;
+        case 'UPDATE_CUSTOM':
+            a = payload;
+        break;
         default:
             a = state;
         break;
